@@ -92,10 +92,11 @@ public class StrutturaController {
 
 
     @PostMapping("/edit/{id}")
-	public String updateStruttura(@PathVariable("id") int id, @ModelAttribute("struttura") Struttura struttura, RedirectAttributes redirectAttributes) {
+	public String updateStruttura(@PathVariable("id") int id, @ModelAttribute("struttura") Struttura struttura, Model model) {
         strutturaService.modificaStruttura(id, struttura);
-        redirectAttributes.addFlashAttribute("strutturaModificata", "1");
-        return "redirect:/strutture/dati";
+        model.addAttribute("strutturaModificata", "1");
+        model.addAttribute("strutture", strutturaService.getDatiStrutture());
+        return "dati-strutture";
         
 	}
 
